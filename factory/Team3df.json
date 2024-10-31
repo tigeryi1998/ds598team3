@@ -1,0 +1,9 @@
+{
+	"name": "Team3df",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "37884669-5f9c-4222-9513-f567fe6a4a87",
+		"tenantId": "d57d32cc-c121-488f-b07b-dfe705680c71"
+	}
+}
