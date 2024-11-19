@@ -1,0 +1,15 @@
+{
+	"name": "NHTSA",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://static.nhtsa.gov",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Basic",
+			"userName": "team_3",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDEyQTkxNzBGLTE0OEItNDVEQi1BNkU4LUZFNjhBMTM3NTY0RV9hZjcyODA3My00NDg3LTQ4ZTYtOTFjNS1jYWZjNzcyZjIxNzgiDQp9"
+		}
+	}
+}
