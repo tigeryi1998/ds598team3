@@ -19,6 +19,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'credential' of 'GitHub1'"
 		},
+		"NHTSA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'NHTSA'"
+		},
+		"HttpServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'HttpServer1'"
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ds598team3.dfs.core.windows.net/"
@@ -34,6 +42,22 @@
 		"GitHub1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "azthorp"
+		},
+		"NHTSA_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://static.nhtsa.gov"
+		},
+		"NHTSA_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "team_3"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://mbta-massdot.opendata.arcgis.com"
+		},
+		"HttpServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "team3"
 		},
 		"containerUri": {
 			"type": "string",
@@ -71,6 +95,12 @@
 					"GitHub1_credential": {
 						"value": "[parameters('GitHub1_credential')]"
 					},
+					"NHTSA_password": {
+						"value": "[parameters('NHTSA_password')]"
+					},
+					"HttpServer1_password": {
+						"value": "[parameters('HttpServer1_password')]"
+					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
@@ -82,6 +112,18 @@
 					},
 					"GitHub1_properties_typeProperties_username": {
 						"value": "[parameters('GitHub1_properties_typeProperties_username')]"
+					},
+					"NHTSA_properties_typeProperties_url": {
+						"value": "[parameters('NHTSA_properties_typeProperties_url')]"
+					},
+					"NHTSA_properties_typeProperties_userName": {
+						"value": "[parameters('NHTSA_properties_typeProperties_userName')]"
+					},
+					"HttpServer1_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
+					},
+					"HttpServer1_properties_typeProperties_userName": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_userName')]"
 					}
 				}
 			},
