@@ -1,0 +1,76 @@
+{
+	"name": "Sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze",
+				"fileSystem": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ride_id",
+				"type": "String"
+			},
+			{
+				"name": "rideable_type",
+				"type": "String"
+			},
+			{
+				"name": "started_at",
+				"type": "String"
+			},
+			{
+				"name": "ended_at",
+				"type": "String"
+			},
+			{
+				"name": "start_station_name",
+				"type": "String"
+			},
+			{
+				"name": "start_station_id",
+				"type": "String"
+			},
+			{
+				"name": "end_station_name",
+				"type": "String"
+			},
+			{
+				"name": "end_station_id",
+				"type": "String"
+			},
+			{
+				"name": "start_lat",
+				"type": "String"
+			},
+			{
+				"name": "start_lng",
+				"type": "String"
+			},
+			{
+				"name": "end_lat",
+				"type": "String"
+			},
+			{
+				"name": "end_lng",
+				"type": "String"
+			},
+			{
+				"name": "member_casual",
+				"type": "String"
+			}
+		]
+	}
+}
