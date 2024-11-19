@@ -186,12 +186,13 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation",
-						"relativeUrl": "https://mbta-massdot.opendata.arcgis.com/datasets/80a379ebaa374cfd836ca4d3880ceda4_0/explore"
+						"relativeUrl": "/datasets/80a379ebaa374cfd836ca4d3880ceda4_0/explore"
 					},
 					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
 					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
+					"firstRowAsHeader": false,
+					"quoteChar": null
 				},
 				"schema": []
 			},
