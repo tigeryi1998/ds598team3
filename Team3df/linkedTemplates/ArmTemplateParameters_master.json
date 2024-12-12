@@ -14,10 +14,10 @@
 		"GitHub1_credential": {
 			"value": ""
 		},
-		"NHTSA_password": {
+		"HttpServer1_password": {
 			"value": ""
 		},
-		"HttpServer1_password": {
+		"NHTSA_password": {
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
@@ -32,17 +32,17 @@
 		"GitHub1_properties_typeProperties_username": {
 			"value": "azthorp"
 		},
-		"NHTSA_properties_typeProperties_url": {
-			"value": "https://static.nhtsa.gov"
-		},
-		"NHTSA_properties_typeProperties_userName": {
-			"value": "team_3"
-		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://mbta-massdot.opendata.arcgis.com"
 		},
 		"HttpServer1_properties_typeProperties_userName": {
 			"value": "team3"
+		},
+		"NHTSA_properties_typeProperties_url": {
+			"value": "https://static.nhtsa.gov"
+		},
+		"NHTSA_properties_typeProperties_userName": {
+			"value": "team_3"
 		},
 		"containerUri": {
 			"value": ""

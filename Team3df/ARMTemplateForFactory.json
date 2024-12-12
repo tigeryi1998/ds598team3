@@ -19,13 +19,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'credential' of 'GitHub1'"
 		},
-		"NHTSA_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'NHTSA'"
-		},
 		"HttpServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'HttpServer1'"
+		},
+		"NHTSA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'NHTSA'"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
@@ -43,14 +43,6 @@
 			"type": "string",
 			"defaultValue": "azthorp"
 		},
-		"NHTSA_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://static.nhtsa.gov"
-		},
-		"NHTSA_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "team_3"
-		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://mbta-massdot.opendata.arcgis.com"
@@ -58,148 +50,20 @@
 		"HttpServer1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "team3"
+		},
+		"NHTSA_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://static.nhtsa.gov"
+		},
+		"NHTSA_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "team_3"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Earthquake')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "HttpServer",
-				"typeProperties": {
-					"url": "[parameters('Earthquake_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GitHub')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "GitHub",
-				"typeProperties": {
-					"username": "[parameters('GitHub_properties_typeProperties_username')]",
-					"credential": {
-						"type": "SecureString",
-						"value": "[parameters('GitHub_credential')]"
-					},
-					"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDEyQTkxNzBGLTE0OEItNDVEQi1BNkU4LUZFNjhBMTM3NTY0RV84N2YzZGU0Zi01ZDM3LTRhOWQtYTA5ZC1iZmVhYThlOTc0NTYiDQp9"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GitHub1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "GitHub",
-				"typeProperties": {
-					"username": "[parameters('GitHub1_properties_typeProperties_username')]",
-					"credential": {
-						"type": "SecureString",
-						"value": "[parameters('GitHub1_credential')]"
-					},
-					"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDEyQTkxNzBGLTE0OEItNDVEQi1BNkU4LUZFNjhBMTM3NTY0RV9lYWQ0MWY3Zi1mNTVmLTQ1OWItOGFmNy0yZDFjNGM1N2E0OWUiDQp9"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/NHTSA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "HttpServer",
-				"typeProperties": {
-					"url": "[parameters('NHTSA_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Basic",
-					"userName": "[parameters('NHTSA_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('NHTSA_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/HttpServer1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "HttpServer",
-				"typeProperties": {
-					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Basic",
-					"userName": "[parameters('HttpServer1_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('HttpServer1_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TransportationData')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "HttpServer1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "HttpServerLocation",
-						"relativeUrl": "/datasets/80a379ebaa374cfd836ca4d3880ceda4_0/explore"
-					},
-					"columnDelimiter": ",",
-					"rowDelimiter": "\n",
-					"escapeChar": "\\",
-					"firstRowAsHeader": false,
-					"quoteChar": null
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/HttpServer1')]"
-			]
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -355,6 +219,1009 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TransportationData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": "/datasets/80a379ebaa374cfd836ca4d3880ceda4_0/explore"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": null
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Earthquake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('Earthquake_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GitHub')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "GitHub",
+				"typeProperties": {
+					"username": "[parameters('GitHub_properties_typeProperties_username')]",
+					"credential": {
+						"type": "SecureString",
+						"value": "[parameters('GitHub_credential')]"
+					},
+					"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDEyQTkxNzBGLTE0OEItNDVEQi1BNkU4LUZFNjhBMTM3NTY0RV84N2YzZGU0Zi01ZDM3LTRhOWQtYTA5ZC1iZmVhYThlOTc0NTYiDQp9"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GitHub1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "GitHub",
+				"typeProperties": {
+					"username": "[parameters('GitHub1_properties_typeProperties_username')]",
+					"credential": {
+						"type": "SecureString",
+						"value": "[parameters('GitHub1_credential')]"
+					},
+					"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDEyQTkxNzBGLTE0OEItNDVEQi1BNkU4LUZFNjhBMTM3NTY0RV9lYWQ0MWY3Zi1mNTVmLTQ1OWItOGFmNy0yZDFjNGM1N2E0OWUiDQp9"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HttpServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('HttpServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('HttpServer1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NHTSA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('NHTSA_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('NHTSA_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('NHTSA_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Weather_Historical')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "weathersample",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "silver_weather",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "flatten1"
+						},
+						{
+							"name": "flatten2"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "derivedColumn2"
+						},
+						{
+							"name": "select1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          message as string,",
+						"          cod as string,",
+						"          city_id as integer,",
+						"          calctime as double,",
+						"          cnt as integer,",
+						"          list as (dt as integer, main as (temp as double, feels_like as double, pressure as integer, humidity as integer, temp_min as double, temp_max as double), wind as (speed as double, deg as integer, gust as double), clouds as (all as integer), weather as (id as integer, main as string, description as string, icon as string)[], rain as ({1h} as double))[]",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     inferDriftedColumnTypes: true,",
+						"     ignoreNoFilesFound: false,",
+						"     documentForm: 'documentPerLine') ~> source1",
+						"source1 foldDown(unroll(list, list),",
+						"     mapColumn(",
+						"          message,",
+						"          cod,",
+						"          city_id,",
+						"          calctime,",
+						"          cnt,",
+						"          dt = list.dt,",
+						"          main = list.main,",
+						"          wind = list.wind,",
+						"          clouds = list.clouds,",
+						"          weather = list.weather,",
+						"          rain = list.rain",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flatten1",
+						"flatten1 foldDown(unroll(weather, weather),",
+						"     mapColumn(",
+						"          calctime,",
+						"          city_id,",
+						"          cnt,",
+						"          cod,",
+						"          message,",
+						"          clouds_all = clouds.all,",
+						"          timestamp = dt,",
+						"          feels_like = main.feels_like,",
+						"          humidity = main.humidity,",
+						"          pressure = main.pressure,",
+						"          temp = main.temp,",
+						"          temp_max = main.temp_max,",
+						"          temp_min = main.temp_min,",
+						"          weather_description = weather.description,",
+						"          weather_icon = weather.icon,",
+						"          weather_id = weather.id,",
+						"          weather_main = weather.main,",
+						"          wind_deg = wind.deg,",
+						"          wind_gust = wind.gust,",
+						"          wind_speed = wind.speed,",
+						"          rain_1h = rain.{1h}",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flatten2",
+						"flatten2 derive(corrected_timestamp = iif(length(toString(timestamp)) == 10, toInteger(timestamp), toInteger(null())),",
+						"          location = 'Boston') ~> derivedColumn1",
+						"derivedColumn1 filter((!isNull(corrected_timestamp))&&(!isNull(temp))&&(!isNull(humidity))) ~> filter1",
+						"filter1 derive(date_time = toTimestamp(toLong(corrected_timestamp) * 1000),",
+						"          id = concat(location, toString(corrected_timestamp)),",
+						"          temp_C = round(temp - 273.15, 2),",
+						"          temp_min_C = round(temp_min - 273.15, 2),",
+						"          temp_max_C = round(temp_max - 273.15, 2),",
+						"          feels_like_C = round(feels_like - 273.15, 2),",
+						"          temp_F = round((temp - 273.15) * 1.8 + 32, 2),",
+						"          temp_min_F = round((temp_min - 273.15) * 1.8 + 32, 2),",
+						"          temp_max_F = round((temp_max - 273.15) * 1.8 + 32, 0),",
+						"          feels_like_F = round((feels_like - 273.15) * 1.8 + 32, 0),",
+						"          lat = 42.3601,",
+						"          lon = -71.0589,",
+						"          weather_id_value = toInteger(split(toString(weather_id), ':')[1]),",
+						"          weather_mail_value = split(toString(weather_main), ': ')[1],",
+						"          weather_description_value = split(toString(weather_description), ': ')[1],",
+						"          weather_icon_value = split(toString(weather_icon), ': ')[1],",
+						"          rain_1h = iif(isNull(rain_1h), toFloat(0.0), toFloat(rain_1h))) ~> derivedColumn2",
+						"derivedColumn2 select(mapColumn(",
+						"          clouds_all,",
+						"          feels_like_K = feels_like,",
+						"          humidity,",
+						"          pressure,",
+						"          temp_K = temp,",
+						"          temp_max_K = temp_max,",
+						"          temp_min_K = temp_min,",
+						"          wind_deg,",
+						"          wind_gust,",
+						"          wind_speed,",
+						"          rain_1h,",
+						"          corrected_timestamp,",
+						"          location,",
+						"          date_time,",
+						"          id,",
+						"          temp_C,",
+						"          temp_min_C,",
+						"          temp_max_C,",
+						"          feels_like_C,",
+						"          temp_F,",
+						"          temp_min_F,",
+						"          temp_max_F,",
+						"          feels_like_F,",
+						"          lat,",
+						"          lon,",
+						"          weather_id_value,",
+						"          weather_mail_value,",
+						"          weather_description_value,",
+						"          weather_icon_value",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"select1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          ride_id as string,",
+						"          rideable_type as string,",
+						"          started_at as timestamp,",
+						"          ended_at as timestamp,",
+						"          start_station_name as string,",
+						"          start_station_id as string,",
+						"          end_station_name as string,",
+						"          end_station_id as string,",
+						"          start_lat as double,",
+						"          start_lng as double,",
+						"          end_lat as double,",
+						"          end_lng as double,",
+						"          member_casual as string,",
+						"          is_bike_lost as long,",
+						"          is_return_to_dock as long,",
+						"          is_start_from_dock as long,",
+						"          distance as double,",
+						"          duration as double,",
+						"          speed_ms as double,",
+						"          speed_kmh as double",
+						"     ),",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/weathersample')]",
+				"[concat(variables('factoryId'), '/datasets/silver_weather')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HistoricalWeather')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "city082a9289efa2d88a1eaaec0efeceb47b98aab51cd5045fafc6e21f3cdd3651c3",
+						"folderPath": "bronze/Weather/HistoricalWeather",
+						"fileSystem": "data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"message": {
+							"type": "string"
+						},
+						"cod": {
+							"type": "string"
+						},
+						"city_id": {
+							"type": "integer"
+						},
+						"calctime": {
+							"type": "number"
+						},
+						"cnt": {
+							"type": "integer"
+						},
+						"list": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"dt": {
+										"type": "integer"
+									},
+									"main": {
+										"type": "object",
+										"properties": {
+											"temp": {
+												"type": "number"
+											},
+											"feels_like": {
+												"type": "number"
+											},
+											"pressure": {
+												"type": "integer"
+											},
+											"humidity": {
+												"type": "integer"
+											},
+											"temp_min": {
+												"type": "number"
+											},
+											"temp_max": {
+												"type": "number"
+											}
+										}
+									},
+									"wind": {
+										"type": "object",
+										"properties": {
+											"speed": {
+												"type": "number"
+											},
+											"deg": {
+												"type": "integer"
+											}
+										}
+									},
+									"clouds": {
+										"type": "object",
+										"properties": {
+											"all": {
+												"type": "integer"
+											}
+										}
+									},
+									"weather": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "integer"
+												},
+												"main": {
+													"type": "string"
+												},
+												"description": {
+													"type": "string"
+												},
+												"icon": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AirPollution')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "history01e90452267e0a6db768eac8a620d760125a8a49a5cd07ac314270cbfe477732",
+						"folderPath": "bronze/Weather/air_pollution",
+						"fileSystem": "data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"coord": {
+							"type": "object",
+							"properties": {
+								"lon": {
+									"type": "number"
+								},
+								"lat": {
+									"type": "number"
+								}
+							}
+						},
+						"list": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"main": {
+										"type": "object",
+										"properties": {
+											"aqi": {
+												"type": "integer"
+											}
+										}
+									},
+									"components": {
+										"type": "object",
+										"properties": {
+											"co": {
+												"type": "number"
+											},
+											"no": {
+												"type": "integer"
+											},
+											"no2": {
+												"type": "number"
+											},
+											"o3": {
+												"type": "number"
+											},
+											"so2": {
+												"type": "number"
+											},
+											"pm2_5": {
+												"type": "number"
+											},
+											"pm10": {
+												"type": "number"
+											},
+											"nh3": {
+												"type": "number"
+											}
+										}
+									},
+									"dt": {
+										"type": "integer"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Air_Pollution_Historical')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AirPollution",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "silver_pollution",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "flatten1"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "derivedColumn2"
+						},
+						{
+							"name": "select1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          coord as (lon as double, lat as double),",
+						"          list as (main as (aqi as integer), components as (co as double, no as integer, no2 as double, o3 as double, so2 as double, pm2_5 as double, pm10 as double, nh3 as double), dt as integer)[]",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     inferDriftedColumnTypes: true,",
+						"     ignoreNoFilesFound: false,",
+						"     documentForm: 'documentPerLine') ~> source1",
+						"source1 foldDown(unroll(list, list),",
+						"     mapColumn(",
+						"          lon = coord.lon,",
+						"          lat = coord.lat,",
+						"          aqi = list.main.aqi,",
+						"          timestamp = list.dt,",
+						"          co = list.components.co,",
+						"          no = list.components.no,",
+						"          no2 = list.components.no2,",
+						"          o3 = list.components.o3,",
+						"          so2 = list.components.so2,",
+						"          pm2_5 = list.components.pm2_5,",
+						"          pm10 = list.components.pm10,",
+						"          nh3 = list.components.nh3",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flatten1",
+						"flatten1 derive(corrected_timestamp = iif(length(toString(timestamp)) == 10, toInteger(timestamp), toInteger(null())),",
+						"          location = 'Boston') ~> derivedColumn1",
+						"derivedColumn1 filter((!isNull(corrected_timestamp))&&(!isNull(aqi))) ~> filter1",
+						"filter1 derive(date_time = toTimestamp(toLong(corrected_timestamp) * 1000),",
+						"          id = concat(location, toString(corrected_timestamp)),",
+						"          co = round(co,2),",
+						"          no = round(no,2),",
+						"          no2 = round(no2,2),",
+						"          o3 = round(o3,2),",
+						"          so2 = round(so2,2),",
+						"          pm2_5 = round(pm2_5,2),",
+						"          pm10 = round(pm10,2),",
+						"          nh3 = round(nh3,2)) ~> derivedColumn2",
+						"derivedColumn2 select(mapColumn(",
+						"          lon,",
+						"          lat,",
+						"          aqi,",
+						"          co,",
+						"          no,",
+						"          no2,",
+						"          o3,",
+						"          so2,",
+						"          pm2_5,",
+						"          pm10,",
+						"          nh3,",
+						"          corrected_timestamp,",
+						"          location,",
+						"          date_time,",
+						"          id",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"select1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AirPollution')]",
+				"[concat(variables('factoryId'), '/datasets/silver_pollution')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/weathersample')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "example_weather.json",
+						"folderPath": "bronze/Weather",
+						"fileSystem": "data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"message": {
+							"type": "string"
+						},
+						"cod": {
+							"type": "string"
+						},
+						"city_id": {
+							"type": "integer"
+						},
+						"calctime": {
+							"type": "number"
+						},
+						"cnt": {
+							"type": "integer"
+						},
+						"list": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"dt": {
+										"type": "integer"
+									},
+									"main": {
+										"type": "object",
+										"properties": {
+											"temp": {
+												"type": "number"
+											},
+											"feels_like": {
+												"type": "number"
+											},
+											"pressure": {
+												"type": "integer"
+											},
+											"humidity": {
+												"type": "integer"
+											},
+											"temp_min": {
+												"type": "number"
+											},
+											"temp_max": {
+												"type": "number"
+											}
+										}
+									},
+									"wind": {
+										"type": "object",
+										"properties": {
+											"speed": {
+												"type": "number"
+											},
+											"deg": {
+												"type": "integer"
+											},
+											"gust": {
+												"type": "number"
+											}
+										}
+									},
+									"clouds": {
+										"type": "object",
+										"properties": {
+											"all": {
+												"type": "integer"
+											}
+										}
+									},
+									"weather": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "integer"
+												},
+												"main": {
+													"type": "string"
+												},
+												"description": {
+													"type": "string"
+												},
+												"icon": {
+													"type": "string"
+												}
+											}
+										}
+									},
+									"rain": {
+										"type": "object",
+										"properties": {
+											"1h": {
+												"type": "number"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/silver_weather')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "silver",
+						"fileSystem": "data"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "ride_id",
+						"type": "UTF8"
+					},
+					{
+						"name": "rideable_type",
+						"type": "UTF8"
+					},
+					{
+						"name": "started_at",
+						"type": "TIMESTAMP_MICROS"
+					},
+					{
+						"name": "ended_at",
+						"type": "TIMESTAMP_MICROS"
+					},
+					{
+						"name": "start_station_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "start_station_id",
+						"type": "UTF8"
+					},
+					{
+						"name": "end_station_name",
+						"type": "UTF8"
+					},
+					{
+						"name": "end_station_id",
+						"type": "UTF8"
+					},
+					{
+						"name": "start_lat",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "start_lng",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "end_lat",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "end_lng",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "member_casual",
+						"type": "UTF8"
+					},
+					{
+						"name": "is_bike_lost",
+						"type": "INT64"
+					},
+					{
+						"name": "is_return_to_dock",
+						"type": "INT64"
+					},
+					{
+						"name": "is_start_from_dock",
+						"type": "INT64"
+					},
+					{
+						"name": "distance",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "duration",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "speed_ms",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "speed_kmh",
+						"type": "DOUBLE"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Preprocess_historical_weather')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Weather_Historical",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Weather_Historical')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/silver_pollution')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "silver",
+						"fileSystem": "data"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Preprocess_Air_Pollution')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Air_Pollution_Historical",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Air_Pollution_Historical')]"
 			]
 		}
 	]
