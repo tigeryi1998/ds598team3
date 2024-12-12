@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "silver_weather",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -148,6 +152,32 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          ride_id as string,",
+				"          rideable_type as string,",
+				"          started_at as timestamp,",
+				"          ended_at as timestamp,",
+				"          start_station_name as string,",
+				"          start_station_id as string,",
+				"          end_station_name as string,",
+				"          end_station_id as string,",
+				"          start_lat as double,",
+				"          start_lng as double,",
+				"          end_lat as double,",
+				"          end_lng as double,",
+				"          member_casual as string,",
+				"          is_bike_lost as long,",
+				"          is_return_to_dock as long,",
+				"          is_start_from_dock as long,",
+				"          distance as double,",
+				"          duration as double,",
+				"          speed_ms as double,",
+				"          speed_kmh as double",
+				"     ),",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> sink1"
