@@ -1,0 +1,101 @@
+{
+	"name": "Parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "silver",
+				"fileSystem": "data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "ride_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "rideable_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "started_at",
+				"type": "TIMESTAMP_MICROS"
+			},
+			{
+				"name": "ended_at",
+				"type": "TIMESTAMP_MICROS"
+			},
+			{
+				"name": "start_station_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "start_station_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "end_station_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "end_station_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "start_lat",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "start_lng",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "end_lat",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "end_lng",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "member_casual",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_bike_lost",
+				"type": "INT64"
+			},
+			{
+				"name": "is_return_to_dock",
+				"type": "INT64"
+			},
+			{
+				"name": "is_start_from_dock",
+				"type": "INT64"
+			},
+			{
+				"name": "distance",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "duration",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "speed_ms",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "speed_kmh",
+				"type": "DOUBLE"
+			}
+		]
+	}
+}
