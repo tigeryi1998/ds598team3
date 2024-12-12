@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "HistoricalWeather",
+						"referenceName": "weathersample",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -35,6 +35,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "flatten3"
 				}
 			],
 			"scriptLines": [
@@ -44,17 +47,28 @@
 				"          city_id as integer,",
 				"          calctime as double,",
 				"          cnt as integer,",
-				"          list as (dt as integer, main as (temp as double, feels_like as double, pressure as integer, humidity as integer, temp_min as double, temp_max as double), wind as (speed as double, deg as integer), clouds as (all as integer), weather as (id as integer, main as string, description as string, icon as string)[])[]",
+				"          list as (dt as integer, main as (temp as double, feels_like as double, pressure as integer, humidity as integer, temp_min as double, temp_max as double), wind as (speed as double, deg as integer, gust as double), clouds as (all as integer), weather as (id as integer, main as string, description as string, icon as string)[], rain as ({1h} as double))[]",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine') ~> source1",
-				"source1 foldDown(unroll(),",
+				"source1 foldDown(unroll(list, list),",
+				"     mapColumn(",
+				"          message,",
+				"          cod,",
+				"          city_id,",
+				"          calctime,",
+				"          main = list.main,",
+				"          wind = list.wind,",
+				"          clouds = list.clouds,",
+				"          weather = list.weather,",
+				"          rain = list.rain",
+				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 foldDown(unroll(),",
+				"flatten3 foldDown(unroll(),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten2",
 				"flatten2 derive() ~> derivedColumn1",
@@ -62,6 +76,9 @@
 				"filter1 derive() ~> derivedColumn2",
 				"derivedColumn2 select(skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"flatten1 foldDown(unroll(),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten3",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",

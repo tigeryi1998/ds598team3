@@ -1,0 +1,123 @@
+{
+	"name": "weathersample",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "example_weather.json",
+				"folderPath": "bronze/Weather",
+				"fileSystem": "data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string"
+				},
+				"cod": {
+					"type": "string"
+				},
+				"city_id": {
+					"type": "integer"
+				},
+				"calctime": {
+					"type": "number"
+				},
+				"cnt": {
+					"type": "integer"
+				},
+				"list": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"dt": {
+								"type": "integer"
+							},
+							"main": {
+								"type": "object",
+								"properties": {
+									"temp": {
+										"type": "number"
+									},
+									"feels_like": {
+										"type": "number"
+									},
+									"pressure": {
+										"type": "integer"
+									},
+									"humidity": {
+										"type": "integer"
+									},
+									"temp_min": {
+										"type": "number"
+									},
+									"temp_max": {
+										"type": "number"
+									}
+								}
+							},
+							"wind": {
+								"type": "object",
+								"properties": {
+									"speed": {
+										"type": "number"
+									},
+									"deg": {
+										"type": "integer"
+									},
+									"gust": {
+										"type": "number"
+									}
+								}
+							},
+							"clouds": {
+								"type": "object",
+								"properties": {
+									"all": {
+										"type": "integer"
+									}
+								}
+							},
+							"weather": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "integer"
+										},
+										"main": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"icon": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"rain": {
+								"type": "object",
+								"properties": {
+									"1h": {
+										"type": "number"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
