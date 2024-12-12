@@ -1027,7 +1027,8 @@
 						"select1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     format: 'parquet',",
-						"     umask: 0022,",
+						"     partitionFileNames:['pollution_silver.parquet'],",
+						"     umask: 0770,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
@@ -1051,7 +1052,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "weathersample",
+								"referenceName": "HistoricalWeather",
 								"type": "DatasetReference"
 							},
 							"name": "source1"
@@ -1220,7 +1221,8 @@
 						"          speed_kmh as double",
 						"     ),",
 						"     format: 'parquet',",
-						"     umask: 0022,",
+						"     partitionFileNames:['weather_silver.parquet'],",
+						"     umask: 0770,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
@@ -1230,7 +1232,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/weathersample')]",
+				"[concat(variables('factoryId'), '/datasets/HistoricalWeather')]",
 				"[concat(variables('factoryId'), '/datasets/silver_weather')]"
 			]
 		}
