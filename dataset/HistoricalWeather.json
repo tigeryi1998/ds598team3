@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "city082a9289efa2d88a1eaaec0efeceb47b98aab51cd5045fafc6e21f3cdd3651c3",
 				"folderPath": "bronze/Weather/HistoricalWeather",
 				"fileSystem": "data"
 			}
@@ -72,6 +71,9 @@
 									},
 									"deg": {
 										"type": "integer"
+									},
+									"gust": {
+										"type": "number"
 									}
 								}
 							},
@@ -100,6 +102,14 @@
 										"icon": {
 											"type": "string"
 										}
+									}
+								}
+							},
+							"rain": {
+								"type": "object",
+								"properties": {
+									"1h": {
+										"type": "number"
 									}
 								}
 							}
