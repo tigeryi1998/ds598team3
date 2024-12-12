@@ -1,0 +1,19 @@
+{
+	"name": "AirPollution",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze/Weather/air_pollution",
+				"fileSystem": "data"
+			}
+		},
+		"schema": {}
+	}
+}

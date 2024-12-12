@@ -1,0 +1,19 @@
+{
+	"name": "HistoricalWeather",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze/Weather/HistoricalWeather",
+				"fileSystem": "data"
+			}
+		},
+		"schema": {}
+	}
+}
