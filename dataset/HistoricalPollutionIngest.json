@@ -25,10 +25,6 @@
 			"End": {
 				"type": "int",
 				"defaultValue": 1733029200
-			},
-			"dataType": {
-				"type": "string",
-				"defaultValue": "hour"
 			}
 		},
 		"annotations": [],
