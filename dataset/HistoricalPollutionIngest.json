@@ -25,6 +25,10 @@
 			"End": {
 				"type": "int",
 				"defaultValue": 1733029200
+			},
+			"dataType": {
+				"type": "string",
+				"defaultValue": "hour"
 			}
 		},
 		"annotations": [],
@@ -32,7 +36,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "data/2.5/air_pollution/history?lat=@{dataset().lat}&lon=@{dataset().lon}&start=@{dataset().start}&end=@{dataset().end}&appid=@{dataset().appid}"
+				"relativeUrl": {
+					"value": "data/2.5/air_pollution/history?lat=@{dataset().lat}&lon=@{dataset().lon}&start=@{dataset().start}&end=@{dataset().end}&appid=@{dataset().appid}",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
