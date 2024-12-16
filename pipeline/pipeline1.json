@@ -55,20 +55,20 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "DelimitedTextSource",
+									"type": "JsonSource",
 									"storeSettings": {
 										"type": "HttpReadSettings",
 										"requestMethod": "GET"
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "JsonReadSettings"
 									}
 								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
-									"referenceName": "TransportationData",
+									"referenceName": "HistoricalPollutionIngest",
 									"type": "DatasetReference"
 								}
 							]
