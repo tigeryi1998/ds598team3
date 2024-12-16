@@ -1,0 +1,17 @@
+{
+	"name": "HistoricalPollutionIngest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HistoricalPollution",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
