@@ -400,7 +400,8 @@
 												"lon": 71.06,
 												"appid": "@activity('Web1').output.value",
 												"Start": "@item().start",
-												"End": "@item().end"
+												"End": "@item().end",
+												"dataType": "hour"
 											}
 										}
 									],

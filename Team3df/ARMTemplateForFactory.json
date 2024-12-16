@@ -284,7 +284,8 @@
 												"lon": 71.06,
 												"appid": "@activity('Web1').output.value",
 												"Start": "@item().start",
-												"End": "@item().end"
+												"End": "@item().end",
+												"dataType": "hour"
 											}
 										}
 									],
@@ -958,6 +959,10 @@
 					"End": {
 						"type": "int",
 						"defaultValue": 1733029200
+					},
+					"dataType": {
+						"type": "string",
+						"defaultValue": "hour"
 					}
 				},
 				"annotations": [],
