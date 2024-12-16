@@ -1,0 +1,279 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "string"
+				},
+				"cod": {
+					"type": "string"
+				},
+				"city_id": {
+					"type": "integer"
+				},
+				"calctime": {
+					"type": "number"
+				},
+				"cnt": {
+					"type": "integer"
+				},
+				"list": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"dt": {
+								"type": "integer"
+							},
+							"main": {
+								"type": "object",
+								"properties": {
+									"temp": {
+										"type": "number"
+									},
+									"feels_like": {
+										"type": "number"
+									},
+									"pressure": {
+										"type": "integer"
+									},
+									"humidity": {
+										"type": "integer"
+									},
+									"temp_min": {
+										"type": "number"
+									},
+									"temp_max": {
+										"type": "number"
+									}
+								}
+							},
+							"wind": {
+								"type": "object",
+								"properties": {
+									"speed": {
+										"type": "number"
+									},
+									"deg": {
+										"type": "integer"
+									},
+									"gust": {
+										"type": "number"
+									}
+								}
+							},
+							"clouds": {
+								"type": "object",
+								"properties": {
+									"all": {
+										"type": "integer"
+									}
+								}
+							},
+							"weather": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "integer"
+										},
+										"main": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"icon": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"rain": {
+								"type": "object",
+								"properties": {
+									"1h": {
+										"type": "number"
+									}
+								}
+							}
+						}
+					}
+				},
+				"data": {
+					"type": "object",
+					"properties": {
+						"stations": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"station_id": {
+										"type": "string"
+									},
+									"ebikes": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"make_and_model": {
+													"type": "string"
+												},
+												"displayed_number": {
+													"type": "string"
+												},
+												"range_estimate": {
+													"type": "object",
+													"properties": {
+														"conservative_range_miles": {
+															"type": "number"
+														},
+														"estimated_range_miles": {
+															"type": "number"
+														}
+													}
+												},
+												"rideable_id": {
+													"type": "string"
+												},
+												"is_lbs_internal_rideable": {
+													"type": "boolean"
+												},
+												"docking_capability": {
+													"type": "integer"
+												},
+												"battery_charge_percentage": {
+													"type": "integer"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"en": {
+							"type": "object",
+							"properties": {
+								"feeds": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"url": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"fr": {
+							"type": "object",
+							"properties": {
+								"feeds": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"url": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"es": {
+							"type": "object",
+							"properties": {
+								"feeds": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"url": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"plans": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"description": {
+										"type": "string"
+									},
+									"price": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"currency": {
+										"type": "string"
+									},
+									"is_taxable": {
+										"type": "boolean"
+									},
+									"plan_id": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"regions": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"region_id": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"last_updated": {
+					"type": "integer"
+				},
+				"ttl": {
+					"type": "integer"
+				},
+				"version": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
