@@ -5,6 +5,28 @@
 			"referenceName": "HistoricalWeather",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"dataType": {
+				"type": "string"
+			},
+			"lat": {
+				"type": "float",
+				"defaultValue": 42.36
+			},
+			"lon": {
+				"type": "float",
+				"defaultValue": 71.06
+			},
+			"appid": {
+				"type": "string"
+			},
+			"start": {
+				"type": "string"
+			},
+			"end": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
