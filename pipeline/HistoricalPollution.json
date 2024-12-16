@@ -78,6 +78,16 @@
 				]
 			}
 		],
+		"parameters": {
+			"Start": {
+				"type": "int",
+				"defaultValue": 1701579600
+			},
+			"End": {
+				"type": "int",
+				"defaultValue": 1733029200
+			}
+		},
 		"annotations": []
 	}
 }

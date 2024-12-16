@@ -5,6 +5,28 @@
 			"referenceName": "HistoricalPollution",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"lat": {
+				"type": "float",
+				"defaultValue": 42.36
+			},
+			"lon": {
+				"type": "float",
+				"defaultValue": 71.06
+			},
+			"appid": {
+				"type": "string",
+				"defaultValue": "@activity('Web1').output.value"
+			},
+			"Start": {
+				"type": "int",
+				"defaultValue": 1701579600
+			},
+			"End": {
+				"type": "int",
+				"defaultValue": 1733029200
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
