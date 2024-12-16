@@ -277,15 +277,15 @@
 									},
 									"inputs": [
 										{
-											"referenceName": "HistoricalPollutionIngest",
+											"referenceName": "HistoricalWeatherIngest",
 											"type": "DatasetReference",
 											"parameters": {
+												"dataType": "hour",
 												"lat": 42.36,
 												"lon": 71.06,
 												"appid": "@activity('Web1').output.value",
-												"Start": "@item().start",
-												"End": "@item().end",
-												"dataType": "hour"
+												"start": "@item().start",
+												"end": "@item().end"
 											}
 										}
 									],
@@ -747,7 +747,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/HistoricalPollutionIngest')]",
+				"[concat(variables('factoryId'), '/datasets/HistoricalWeatherIngest')]",
 				"[concat(variables('factoryId'), '/datasets/HistoricalWeather')]"
 			]
 		},
@@ -857,7 +857,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "bronze/Weather/UpdatedHistoricalWeather",
+						"folderPath": "bronze/Weather",
 						"fileSystem": "data"
 					}
 				},
@@ -959,10 +959,6 @@
 					"End": {
 						"type": "int",
 						"defaultValue": 1733029200
-					},
-					"dataType": {
-						"type": "string",
-						"defaultValue": "hour"
 					}
 				},
 				"annotations": [],
@@ -996,7 +992,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "bronze/Weather/UpdatedHistoricalWeather",
+						"folderPath": "bronze/Weather",
 						"fileSystem": "data"
 					}
 				},
