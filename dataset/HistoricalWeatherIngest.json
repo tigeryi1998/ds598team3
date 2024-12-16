@@ -7,7 +7,8 @@
 		},
 		"parameters": {
 			"dataType": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "hour"
 			},
 			"lat": {
 				"type": "float",
@@ -18,13 +19,16 @@
 				"defaultValue": 71.06
 			},
 			"appid": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@activity('Web1').output.value"
 			},
 			"start": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@item().start"
 			},
 			"end": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@item().end"
 			}
 		},
 		"annotations": [],
