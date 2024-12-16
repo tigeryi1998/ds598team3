@@ -58,6 +58,26 @@
 		"NHTSA_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "team_3"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://Team3KeyVault.vault.azure.net/"
+		},
+		"HistoricalWeather_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://history.openweathermap.org/"
+		},
+		"HistoricalWeather_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Team3"
+		},
+		"HistoricalPollution_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": " http://api.openweathermap.org/"
+		},
+		"HistoricalPollution_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Team3"
 		}
 	},
 	"variables": {
@@ -163,8 +183,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data1",
-						"type": "Copy",
+						"name": "Web1",
+						"type": "WebActivity",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -175,61 +195,530 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "HttpReadSettings",
-									"requestMethod": "GET"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
+							"method": "GET",
+							"headers": {},
+							"url": "https://Team3KeyVault.vault.azure.net/secrets/OpenWeatherKey?api-version=7.0",
+							"authentication": {
+								"type": "MSI",
+								"resource": " https://vault.azure.net"
 							}
-						},
-						"inputs": [
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
 							{
-								"referenceName": "TransportationData",
-								"type": "DatasetReference",
-								"parameters": {}
+								"activity": "Web1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
-						"outputs": [
-							{
-								"referenceName": "Sink",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.DateRange",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data2",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "JsonSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "JsonReadSettings"
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "HistoricalPollutionIngest",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "HistoricalWeather",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								}
+							]
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"parameters": {
+					"DateRange": {
+						"type": "array",
+						"defaultValue": [
+							{
+								"start": "1733029200",
+								"end": "1732424400"
+							},
+							{
+								"start": "1732424400",
+								"end": "1731819600"
+							},
+							{
+								"start": "1731819600",
+								"end": "1731214800"
+							},
+							{
+								"start": "1731214800",
+								"end": "1730610000"
+							},
+							{
+								"start": "1730610000",
+								"end": "1730005200"
+							},
+							{
+								"start": "1730005200",
+								"end": "1729400400"
+							},
+							{
+								"start": "1729400400",
+								"end": "1728795600"
+							},
+							{
+								"start": "1728795600",
+								"end": "1728190800"
+							},
+							{
+								"start": "1728190800",
+								"end": "1727586000"
+							},
+							{
+								"start": "1727586000",
+								"end": "1726981200"
+							},
+							{
+								"start": "1726981200",
+								"end": "1726376400"
+							},
+							{
+								"start": "1726376400",
+								"end": "1725771600"
+							},
+							{
+								"start": "1725771600",
+								"end": "1725166800"
+							},
+							{
+								"start": "1725166800",
+								"end": "1724562000"
+							},
+							{
+								"start": "1724562000",
+								"end": "1723957200"
+							},
+							{
+								"start": "1723957200",
+								"end": "1723352400"
+							},
+							{
+								"start": "1723352400",
+								"end": "1722747600"
+							},
+							{
+								"start": "1722747600",
+								"end": "1722142800"
+							},
+							{
+								"start": "1722142800",
+								"end": "1721538000"
+							},
+							{
+								"start": "1721538000",
+								"end": "1720933200"
+							},
+							{
+								"start": "1720933200",
+								"end": "1720328400"
+							},
+							{
+								"start": "1720328400",
+								"end": "1719723600"
+							},
+							{
+								"start": "1719723600",
+								"end": "1719118800"
+							},
+							{
+								"start": "1719118800",
+								"end": "1718514000"
+							},
+							{
+								"start": "1718514000",
+								"end": "1717909200"
+							},
+							{
+								"start": "1717909200",
+								"end": "1717304400"
+							},
+							{
+								"start": "1717304400",
+								"end": "1716699600"
+							},
+							{
+								"start": "1716699600",
+								"end": "1716094800"
+							},
+							{
+								"start": "1716094800",
+								"end": "1715490000"
+							},
+							{
+								"start": "1715490000",
+								"end": "1714885200"
+							},
+							{
+								"start": "1714885200",
+								"end": "1714280400"
+							},
+							{
+								"start": "1714280400",
+								"end": "1713675600"
+							},
+							{
+								"start": "1713675600",
+								"end": "1713070800"
+							},
+							{
+								"start": "1713070800",
+								"end": "1712466000"
+							},
+							{
+								"start": "1712466000",
+								"end": "1711861200"
+							},
+							{
+								"start": "1711861200",
+								"end": "1711256400"
+							},
+							{
+								"start": "1711256400",
+								"end": "1710651600"
+							},
+							{
+								"start": "1710651600",
+								"end": "1710046800"
+							},
+							{
+								"start": "1710046800",
+								"end": "1709442000"
+							},
+							{
+								"start": "1709442000",
+								"end": "1708837200"
+							},
+							{
+								"start": "1708837200",
+								"end": "1708232400"
+							},
+							{
+								"start": "1708232400",
+								"end": "1707627600"
+							},
+							{
+								"start": "1707627600",
+								"end": "1707022800"
+							},
+							{
+								"start": "1707022800",
+								"end": "1706418000"
+							},
+							{
+								"start": "1706418000",
+								"end": "1705813200"
+							},
+							{
+								"start": "1705813200",
+								"end": "1705208400"
+							},
+							{
+								"start": "1705208400",
+								"end": "1704603600"
+							},
+							{
+								"start": "1704603600",
+								"end": "1703998800"
+							},
+							{
+								"start": "1703998800",
+								"end": "1703394000"
+							},
+							{
+								"start": "1703394000",
+								"end": "1702789200"
+							},
+							{
+								"start": "1702789200",
+								"end": "1702184400"
+							},
+							{
+								"start": "1702184400",
+								"end": "1701579600"
+							}
+						]
+					}
+				},
+				"variables": {
+					"DateRange": {
+						"type": "Array",
+						"defaultValue": [
+							{
+								"start": "1733029200",
+								"end": "1732424400"
+							},
+							{
+								"start": "1732424400",
+								"end": "1731819600"
+							},
+							{
+								"start": "1731819600",
+								"end": "1731214800"
+							},
+							{
+								"start": "1731214800",
+								"end": "1730610000"
+							},
+							{
+								"start": "1730610000",
+								"end": "1730005200"
+							},
+							{
+								"start": "1730005200",
+								"end": "1729400400"
+							},
+							{
+								"start": "1729400400",
+								"end": "1728795600"
+							},
+							{
+								"start": "1728795600",
+								"end": "1728190800"
+							},
+							{
+								"start": "1728190800",
+								"end": "1727586000"
+							},
+							{
+								"start": "1727586000",
+								"end": "1726981200"
+							},
+							{
+								"start": "1726981200",
+								"end": "1726376400"
+							},
+							{
+								"start": "1726376400",
+								"end": "1725771600"
+							},
+							{
+								"start": "1725771600",
+								"end": "1725166800"
+							},
+							{
+								"start": "1725166800",
+								"end": "1724562000"
+							},
+							{
+								"start": "1724562000",
+								"end": "1723957200"
+							},
+							{
+								"start": "1723957200",
+								"end": "1723352400"
+							},
+							{
+								"start": "1723352400",
+								"end": "1722747600"
+							},
+							{
+								"start": "1722747600",
+								"end": "1722142800"
+							},
+							{
+								"start": "1722142800",
+								"end": "1721538000"
+							},
+							{
+								"start": "1721538000",
+								"end": "1720933200"
+							},
+							{
+								"start": "1720933200",
+								"end": "1720328400"
+							},
+							{
+								"start": "1720328400",
+								"end": "1719723600"
+							},
+							{
+								"start": "1719723600",
+								"end": "1719118800"
+							},
+							{
+								"start": "1719118800",
+								"end": "1718514000"
+							},
+							{
+								"start": "1718514000",
+								"end": "1717909200"
+							},
+							{
+								"start": "1717909200",
+								"end": "1717304400"
+							},
+							{
+								"start": "1717304400",
+								"end": "1716699600"
+							},
+							{
+								"start": "1716699600",
+								"end": "1716094800"
+							},
+							{
+								"start": "1716094800",
+								"end": "1715490000"
+							},
+							{
+								"start": "1715490000",
+								"end": "1714885200"
+							},
+							{
+								"start": "1714885200",
+								"end": "1714280400"
+							},
+							{
+								"start": "1714280400",
+								"end": "1713675600"
+							},
+							{
+								"start": "1713675600",
+								"end": "1713070800"
+							},
+							{
+								"start": "1713070800",
+								"end": "1712466000"
+							},
+							{
+								"start": "1712466000",
+								"end": "1711861200"
+							},
+							{
+								"start": "1711861200",
+								"end": "1711256400"
+							},
+							{
+								"start": "1711256400",
+								"end": "1710651600"
+							},
+							{
+								"start": "1710651600",
+								"end": "1710046800"
+							},
+							{
+								"start": "1710046800",
+								"end": "1709442000"
+							},
+							{
+								"start": "1709442000",
+								"end": "1708837200"
+							},
+							{
+								"start": "1708837200",
+								"end": "1708232400"
+							},
+							{
+								"start": "1708232400",
+								"end": "1707627600"
+							},
+							{
+								"start": "1707627600",
+								"end": "1707022800"
+							},
+							{
+								"start": "1707022800",
+								"end": "1706418000"
+							},
+							{
+								"start": "1706418000",
+								"end": "1705813200"
+							},
+							{
+								"start": "1705813200",
+								"end": "1705208400"
+							},
+							{
+								"start": "1705208400",
+								"end": "1704603600"
+							},
+							{
+								"start": "1704603600",
+								"end": "1703998800"
+							},
+							{
+								"start": "1703998800",
+								"end": "1703394000"
+							},
+							{
+								"start": "1703394000",
+								"end": "1702789200"
+							},
+							{
+								"start": "1702789200",
+								"end": "1702184400"
+							},
+							{
+								"start": "1702184400",
+								"end": "1701579600"
+							}
+						]
+					},
+					"endDate": {
+						"type": "String"
+					},
+					"startDate": {
+						"type": "String"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TransportationData')]",
-				"[concat(variables('factoryId'), '/datasets/Sink')]"
+				"[concat(variables('factoryId'), '/datasets/HistoricalPollutionIngest')]",
+				"[concat(variables('factoryId'), '/datasets/HistoricalWeather')]"
 			]
 		},
 		{
@@ -334,7 +823,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "bronze/Weather/HistoricalWeather",
+						"folderPath": "bronze/Weather",
 						"fileSystem": "data"
 					}
 				},
@@ -445,6 +934,290 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"message": {
+							"type": "string"
+						},
+						"cod": {
+							"type": "string"
+						},
+						"city_id": {
+							"type": "integer"
+						},
+						"calctime": {
+							"type": "number"
+						},
+						"cnt": {
+							"type": "integer"
+						},
+						"list": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"dt": {
+										"type": "integer"
+									},
+									"main": {
+										"type": "object",
+										"properties": {
+											"temp": {
+												"type": "number"
+											},
+											"feels_like": {
+												"type": "number"
+											},
+											"pressure": {
+												"type": "integer"
+											},
+											"humidity": {
+												"type": "integer"
+											},
+											"temp_min": {
+												"type": "number"
+											},
+											"temp_max": {
+												"type": "number"
+											}
+										}
+									},
+									"wind": {
+										"type": "object",
+										"properties": {
+											"speed": {
+												"type": "number"
+											},
+											"deg": {
+												"type": "integer"
+											},
+											"gust": {
+												"type": "number"
+											}
+										}
+									},
+									"clouds": {
+										"type": "object",
+										"properties": {
+											"all": {
+												"type": "integer"
+											}
+										}
+									},
+									"weather": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "integer"
+												},
+												"main": {
+													"type": "string"
+												},
+												"description": {
+													"type": "string"
+												},
+												"icon": {
+													"type": "string"
+												}
+											}
+										}
+									},
+									"rain": {
+										"type": "object",
+										"properties": {
+											"1h": {
+												"type": "number"
+											}
+										}
+									}
+								}
+							}
+						},
+						"data": {
+							"type": "object",
+							"properties": {
+								"stations": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"station_id": {
+												"type": "string"
+											},
+											"ebikes": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"make_and_model": {
+															"type": "string"
+														},
+														"displayed_number": {
+															"type": "string"
+														},
+														"range_estimate": {
+															"type": "object",
+															"properties": {
+																"conservative_range_miles": {
+																	"type": "number"
+																},
+																"estimated_range_miles": {
+																	"type": "number"
+																}
+															}
+														},
+														"rideable_id": {
+															"type": "string"
+														},
+														"is_lbs_internal_rideable": {
+															"type": "boolean"
+														},
+														"docking_capability": {
+															"type": "integer"
+														},
+														"battery_charge_percentage": {
+															"type": "integer"
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"en": {
+									"type": "object",
+									"properties": {
+										"feeds": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"url": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"fr": {
+									"type": "object",
+									"properties": {
+										"feeds": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"url": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"es": {
+									"type": "object",
+									"properties": {
+										"feeds": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"url": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"plans": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"description": {
+												"type": "string"
+											},
+											"price": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											},
+											"currency": {
+												"type": "string"
+											},
+											"is_taxable": {
+												"type": "boolean"
+											},
+											"plan_id": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"regions": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"region_id": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"last_updated": {
+							"type": "integer"
+						},
+						"ttl": {
+							"type": "integer"
+						},
+						"version": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer1')]"
 			]
 		},
 		{
@@ -1234,6 +2007,142 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/HistoricalWeather')]",
 				"[concat(variables('factoryId'), '/datasets/silver_weather')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HistoricalWeather')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HistoricalWeather_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('HistoricalWeather_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "OpenWeatherKey"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HistoricalPollution')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HistoricalPollution_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('HistoricalPollution_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "OpenWeatherKey"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HistoricalWeatherIngest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HistoricalWeather",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"dataType": {
+						"type": "string",
+						"defaultValue": "hour"
+					},
+					"lat": {
+						"type": "float",
+						"defaultValue": 42.36
+					},
+					"lon": {
+						"type": "float",
+						"defaultValue": 71.06
+					},
+					"appid": {
+						"type": "string",
+						"defaultValue": "@activity('Web1').output.value"
+					},
+					"start": {
+						"type": "string",
+						"defaultValue": "@item().start"
+					},
+					"end": {
+						"type": "string",
+						"defaultValue": "@item().end"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": "data/2.5/history/city?lat=@{dataset().lat}&lon=@{dataset().lon}&type=@{dataset().dataType}&start=@{dataset().start}&end=@{dataset().end}&appid=@{dataset().appid}"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HistoricalWeather')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HistoricalPollutionIngest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HistoricalPollution",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HistoricalPollution')]"
 			]
 		}
 	]

@@ -44,6 +44,21 @@
 		"NHTSA_properties_typeProperties_userName": {
 			"value": "team_3"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://Team3KeyVault.vault.azure.net/"
+		},
+		"HistoricalWeather_properties_typeProperties_url": {
+			"value": "https://history.openweathermap.org/"
+		},
+		"HistoricalWeather_properties_typeProperties_userName": {
+			"value": "Team3"
+		},
+		"HistoricalPollution_properties_typeProperties_url": {
+			"value": " http://api.openweathermap.org/"
+		},
+		"HistoricalPollution_properties_typeProperties_userName": {
+			"value": "Team3"
+		},
 		"containerUri": {
 			"value": ""
 		},

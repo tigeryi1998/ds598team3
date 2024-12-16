@@ -59,6 +59,26 @@
 			"type": "string",
 			"defaultValue": "team_3"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://Team3KeyVault.vault.azure.net/"
+		},
+		"HistoricalWeather_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://history.openweathermap.org/"
+		},
+		"HistoricalWeather_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Team3"
+		},
+		"HistoricalPollution_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": " http://api.openweathermap.org/"
+		},
+		"HistoricalPollution_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Team3"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -124,10 +144,45 @@
 					},
 					"NHTSA_properties_typeProperties_userName": {
 						"value": "[parameters('NHTSA_properties_typeProperties_userName')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"HistoricalWeather_properties_typeProperties_url": {
+						"value": "[parameters('HistoricalWeather_properties_typeProperties_url')]"
+					},
+					"HistoricalWeather_properties_typeProperties_userName": {
+						"value": "[parameters('HistoricalWeather_properties_typeProperties_userName')]"
+					},
+					"HistoricalPollution_properties_typeProperties_url": {
+						"value": "[parameters('HistoricalPollution_properties_typeProperties_url')]"
+					},
+					"HistoricalPollution_properties_typeProperties_userName": {
+						"value": "[parameters('HistoricalPollution_properties_typeProperties_userName')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "Team3df_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Team3df_ArmTemplate_0')]"
+			]
 		}
 	]
 }
