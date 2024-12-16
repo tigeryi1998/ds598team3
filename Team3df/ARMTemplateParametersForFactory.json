@@ -23,6 +23,9 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://ds598team3.dfs.core.windows.net/"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://Team3KeyVault.vault.azure.net/"
+		},
 		"Earthquake_properties_typeProperties_url": {
 			"value": "https://earthquake.usgs.gov/fdsnws/event/1/"
 		},
@@ -31,6 +34,18 @@
 		},
 		"GitHub1_properties_typeProperties_username": {
 			"value": "azthorp"
+		},
+		"HistoricalPollution_properties_typeProperties_url": {
+			"value": " http://api.openweathermap.org/"
+		},
+		"HistoricalPollution_properties_typeProperties_userName": {
+			"value": "Team3"
+		},
+		"HistoricalWeather_properties_typeProperties_url": {
+			"value": "https://history.openweathermap.org/"
+		},
+		"HistoricalWeather_properties_typeProperties_userName": {
+			"value": "Team3"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://mbta-massdot.opendata.arcgis.com"
@@ -43,21 +58,6 @@
 		},
 		"NHTSA_properties_typeProperties_userName": {
 			"value": "team_3"
-		},
-		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"value": "https://Team3KeyVault.vault.azure.net/"
-		},
-		"HistoricalWeather_properties_typeProperties_url": {
-			"value": "https://history.openweathermap.org/"
-		},
-		"HistoricalWeather_properties_typeProperties_userName": {
-			"value": "Team3"
-		},
-		"HistoricalPollution_properties_typeProperties_url": {
-			"value": " http://api.openweathermap.org/"
-		},
-		"HistoricalPollution_properties_typeProperties_userName": {
-			"value": "Team3"
 		}
 	}
 }
